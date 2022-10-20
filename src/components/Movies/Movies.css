@@ -1,0 +1,9 @@
+.movies {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.activePage {
+    border: 1px solid black;
+}

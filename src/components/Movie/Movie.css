@@ -1,0 +1,10 @@
+.movie_card {
+    width: 12%;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.poster {
+    height: 250px;
+}
