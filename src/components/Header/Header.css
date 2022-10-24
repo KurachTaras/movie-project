@@ -1,0 +1,116 @@
+.header{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    min-height: 50px;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 100px;
+    transition: 0.5s;
+}
+
+.logo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+}
+
+.navbar {
+    display: flex;
+    column-gap: 5rem;
+}
+
+.navbar li {
+    position: relative;
+}
+
+.navbar a{
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: snow;
+}
+.navbar a::after{
+    content: "";
+    width: 0;
+    height: 2px;
+    background: red;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    transition: 0.4s all linear;
+}
+
+.navbar a:hover::after, .active{
+    width: 100%;
+}
+
+.navbar a[class='active']{
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid darkred;
+    border-radius: 5px;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.header_form {
+    position: relative;
+}
+
+.form {
+    width: 400px;
+}
+
+.header_form_input {
+    width: 300px;
+    font-size: 16px;
+    font-weight: 100;
+    line-height: 30px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.header_form_input::placeholder {
+    padding-left: 30px;
+}
+
+.header_form_input[type=text] {
+    padding-left: 30px;
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
+}
+
+.BsSearch {
+    position: relative;
+    top: 5px;
+    left: -30px;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.header_avatar {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header_avatar {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.header_avatar:hover {
+    border: 2px solid crimson;
+}
+

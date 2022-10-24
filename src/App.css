@@ -1,5 +1,11 @@
 .App {
-  text-align: center;
+}
+
+.app_movie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
 }
 
 .App-logo {

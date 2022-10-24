@@ -18,7 +18,11 @@ const urls = {
     nowPlaying: '/movie/now_playing?',
     similar: '/movie/',
     video: '/movie/',
-    upcoming: '/movie/upcoming?'
+    upcoming: '/movie/upcoming?',
+    account: 'account/',
+    addItemList: '/list/8223831/add_item',
+    favorite: '/account/',
+    tvVideo: '/tv/',
 }
 
 export {

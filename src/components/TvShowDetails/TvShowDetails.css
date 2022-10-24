@@ -1,0 +1,30 @@
+.tvSHow_createdBy {
+    color: white;
+    border: 1px solid white;
+    padding: 10px;
+    margin-top: 20px;
+    display: flex;
+}
+
+.tvSHow_createdBy_span {
+    margin-right: 40px;
+}
+
+.tvSHow_createdBy_span {
+    gap: 5px;
+}
+
+.tvShow_realise_runtime, .tvShow_details-container_info{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.tvSHow_realise, .tvSHow_runtime, .tvShow_details_title,
+.tvShow_details_status, .tvShow_type, .tvShow_popularity{
+    color: white;
+    border: 1px solid white;
+    padding: 10px;
+    margin: 20px 20px;
+}
+

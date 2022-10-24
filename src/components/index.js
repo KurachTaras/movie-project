@@ -9,7 +9,11 @@ export * from './MovieGenres/MovieGenres';
 export * from './MovieGenreDetails/MovieGenreDetails';
 export * from './TvShows/TvShows';
 export * from './TvShow/TvShow';
-export * from './Populars/Populars';
-export * from './Popular/Popular';
 export * from './Similar/Similar';
-export * from './SimilarDetails/SimilarDetails'
+export * from './SimilarDetails/SimilarDetails';
+export * from './Search/Search';
+export * from './SearchCard/SearchCard';
+export * from './TrendingPoster/TrendingPoster';
+export * from './Cinema/Cinema';
+export * from './CinemaCard/CinemaCard';
+export * from './TvShowDetails/TvShowDetails';

@@ -18,6 +18,10 @@ const initialState = {
     videos: [],
     upcoming: [],
     upcomingDates: {},
+    movieList: [],
+    account: {},
+    favoriteMovies: [],
+    tvShowVideo: [],
     currentMovie: null,
     loading: false,
     error: null,
@@ -29,7 +33,45 @@ const initialState = {
     siblingCount:  1,
     pageRange: 5000,
     movieId: '',
+
 }
+
+
+const getMovieList = createAsyncThunk(
+    'moviesSlice/getMovieList',
+    async (_, {rejectedWithValue, dispatch}) => {
+        try {
+            const {data} = await movieService.getLists();
+            return data
+        } catch (e) {
+            return rejectedWithValue(e.response.data)
+        }
+    }
+);
+
+const getAccount = createAsyncThunk(
+    'moviesSlice/getAccount',
+    async (_, {rejectedWithValue, dispatch}) => {
+        try {
+            const {data} = await movieService.getAccount();
+            return data
+        } catch (e) {
+            return rejectedWithValue(e.response.data)
+        }
+    }
+);
+
+const getFavoriteMovies = createAsyncThunk(
+    'movies/Slice/getFavoriteMovies',
+    async (_, {rejectedWithValue, dispatch}) => {
+        try {
+            const {data} = await movieService.getFavorite();
+            return data
+        } catch (e) {
+            return rejectedWithValue(e.response.data)
+        }
+    }
+);
 
 const getMovies = createAsyncThunk(
     'moviesSlice/getMovies',
@@ -155,6 +197,18 @@ const getVideo = createAsyncThunk(
     }
 );
 
+const getTvVideo = createAsyncThunk(
+    'moviesSlice/getTvVideo',
+    async ({id}, {rejectedWithValue, dispatch}) => {
+        try {
+            const {data} = await movieService.getTvVideo(id);
+            return data
+        } catch (e) {
+            return rejectedWithValue(e.response.data)
+        }
+    }
+);
+
 
 const getMGenres = createAsyncThunk(
     'moviesSlice/getGenres',
@@ -187,7 +241,24 @@ const movieSlice = createSlice({
         },
         setId: (state, action) => {
             state.movieId = action.payload
-        }
+        },
+        addMovie: (state, action) => {
+            state.watchList = action.payload
+        },
+        removeMovie: (state, action) => {
+            state.watchList = state.watchList.filter(movie => movie.id !== action.payload)
+        },
+        markWatched: (state, action) => {
+            state.watchList = state.watchList.filter(movie => movie.id !== action.payload)
+            state.watched = action.payload
+        },
+        moveToWatchList: (state, action) => {
+            state.watched = state.watched.filter(movie => movie.id !== action.payload)
+            state.watchList = action.payload
+        },
+        removeWatched: (state, action) => {
+            state.watched = state.watched.filter(data => data.id !== action.payload)
+        },
     },
     extraReducers: builder =>
         builder
@@ -230,7 +301,7 @@ const movieSlice = createSlice({
             .addCase(getNowPlaying.fulfilled, (state, action) => {
                 const {page, dates, results} = action.payload
                 state.nowPlaying = results
-                state.nowPlayingdates = dates
+                state.nowPlayingDates = dates
             })
             .addCase(getSimilar.fulfilled, (state, action) => {
                 const {page, results} = action.payload
@@ -245,6 +316,21 @@ const movieSlice = createSlice({
                 state.upcoming = results
                 state.upcomingDates = dates
             })
+            .addCase(getMovieList.fulfilled, (state, action) => {
+                const {page, results} = action.payload
+                state.movieList = results
+            })
+            .addCase(getAccount.fulfilled, (state, action) => {
+               state.account = action.payload
+            })
+            .addCase(getFavoriteMovies.fulfilled, (state, action) => {
+                const {page, results} = action.payload
+                state.favoriteMovies = results
+            })
+            .addCase(getTvVideo.fulfilled, (state, action) => {
+                const {id, results} = action.payload
+                state.tvShowVideo = results
+            })
             // .addCase(getPage.fulfilled, (state, action) => {
             //     state.page = action.payload
             // })
@@ -253,7 +339,7 @@ const movieSlice = createSlice({
             // })
 })
 
-const {reducer: movieReducer, actions: {nextPage, setId}} = movieSlice;
+const {reducer: movieReducer, actions: {nextPage, setId, addMovie, removeMovie, markWatched, moveToWatchList, removeWatched}} = movieSlice;
 
 const movieActions = {
     getGenres,
@@ -268,10 +354,17 @@ const movieActions = {
     getSimilar,
     getVideo,
     getUpcoming,
-    // getPage,
-    // getPages,
+    getAccount,
+    getFavoriteMovies,
+    getMovieList,
     nextPage,
-    setId
+    setId,
+    addMovie,
+    removeMovie,
+    markWatched,
+    moveToWatchList,
+    removeWatched,
+    getTvVideo
 }
 
 export {

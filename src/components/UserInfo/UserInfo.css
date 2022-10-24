@@ -1,0 +1,30 @@
+.user_card {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.user_card_info {
+    display: flex;
+    justify-content: space-between;
+    gap: 250px;
+}
+
+.user_photo {
+    height: 500px;
+}
+
+.user_card_name {
+    width:750px;
+}
+
+.user_name, .user_card_id, .user_username {
+    width: 40%;
+    color: white;
+    border: 1px solid white;
+    padding: 10px;
+    margin: 20px 20px;
+}

@@ -1,4 +1,4 @@
-import {urls} from "../configs";
+import {API_KEY, urls} from "../configs";
 import {axiosService} from "./axios.service";
 
 const movieService = {
@@ -15,6 +15,11 @@ const movieService = {
     getSimilar: (id)=> axiosService.get(`${urls.similar}/${id}/similar`),
     getVideo: (id)=> axiosService.get(`${urls.video}${id}/videos`),
     getUpcoming: ()=> axiosService.get(urls.upcoming),
+    getAccount: ()=> axiosService.get(`${urls.account}${API_KEY}`),
+    getLists: ()=> axiosService.get(`${urls.account}${API_KEY}/lists?`),
+    getFavorite: ()=> axiosService.get(`${urls.favorite}${API_KEY}/favorite/movies?`),
+    postItem: (media_id)=> axiosService.post(urls.addItemList, {params: {media_id}}),
+    getTvVideo: (id)=> axiosService.get(`${urls.tvVideo}${id}/videos`),
 }
 
 export {

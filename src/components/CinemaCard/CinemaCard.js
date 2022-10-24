@@ -1,16 +1,14 @@
 import React from 'react';
-import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {movieActions} from "../../redux";
+import {useSelector} from "react-redux";
 import StarRatings from "react-star-ratings/build/star-ratings";
+import {useNavigate} from "react-router-dom";
 
-const Similar = ({similarOne}) => {
+const CinemaCard = ({playing}) => {
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
     const {genres} = useSelector(state => state.movieReducer);
+    const navigate = useNavigate();
 
-    const filteredGenres = similarOne?.genre_ids.reduce((acc, id) => {
+    const filteredGenres = playing?.genre_ids.reduce((acc, id) => {
         const mathedGenre = genres.find(genre => genre.id === id);
         if (mathedGenre) {
             acc.push(mathedGenre)
@@ -19,11 +17,12 @@ const Similar = ({similarOne}) => {
     }, []);
 
     return (
+
         <div className={'movie_card'} onClick={()=> {
-            navigate(`/movies/${similarOne.id}`)
+            navigate(`/movies/${playing.id}`)
         }}>
             <div className={'movie_poster'}>
-                <img className={'poster'} src={"https://image.tmdb.org/t/p/w500/" + similarOne?.poster_path } alt="" />
+                <img className={'poster'} src={"https://image.tmdb.org/t/p/w500/" + playing?.poster_path } alt="" />
             </div>
             <div className={'movie_genres'}>
                 {filteredGenres?.map((genre) => (
@@ -32,17 +31,17 @@ const Similar = ({similarOne}) => {
             </div>
             <div className={'movie_ratings'}>
                 <StarRatings name={'movie_rating_star'}
-                             rating={similarOne?.vote_average}
+                             rating={playing.vote_average}
                              starRatedColor={"white"}
                              numberOfStars={5}
                              starDimension={"15px"}
                 />
             </div>
             <div className={'movie_info'}>
-                <div className={'movie_title'}>{similarOne.title}</div>
+                <div className={'movie_title'}>{playing.title}</div>
             </div>
         </div>
     );
 };
 
-export {Similar};
+export {CinemaCard};

@@ -1,0 +1,35 @@
+.cinema_container {
+}
+
+.cinema_dates {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    border: 2px solid white;
+}
+
+.movie_details_dates {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie_details-container_info_d{
+    border: 1px solid white;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+.dates_span {
+    margin: 10px;
+    font-style: italic;
+    font-weight: bold;
+    border: 1px solid white;
+}

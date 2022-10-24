@@ -5,6 +5,7 @@ import {Movies} from "../../components";
 import {Outlet} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {movieActions} from "../../redux";
+import './MoviesPage.css'
 
 const MoviesPage = () => {
     //
@@ -25,8 +26,7 @@ const MoviesPage = () => {
     // }
 
     return (
-        <div>
-            {/*<Movies movies={movies} setMovies={setMovies} />*/}
+        <div className={'movies_pages'}>
             <Movies/>
         </div>
     );

@@ -1,42 +1,36 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useParams} from "react-router-dom";
+
 import {useDispatch, useSelector} from "react-redux";
-import {movieActions} from "../../redux";
-import YouTube from "react-youtube";
-import {Similar} from "../Similar/Similar";
-
-import './MovieDetails.css'
 import StarRatings from "react-star-ratings/build/star-ratings";
+import YouTube from "react-youtube";
+import './TvShowDetails.css'
 
+const TvShowDetails = () => {
 
-const MovieDetails = () => {
-
-    const location = useLocation();
-    const dispatch = useDispatch();
-    const {videos, similar, movieId, watchList, watched} = useSelector(state => state.movieReducer);
-
+    const [data, setData] = useState([]);
     const {id} = useParams();
-    const [data, setData] = useState({});
+    const {tvPopularById, tvShowVideo} = useSelector(state => state.movieReducer);
 
+    const [video, setVideo] = useState({});
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=7cf9b0f30126c3f31e4009979a376a0f`)
+        fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=7cf9b0f30126c3f31e4009979a376a0f`)
             .then(value => value.json())
             .then(value => {
                 setData({...value})
             })
-    }, [id, movieId])
+    }, [id])
 
     useEffect(() => {
-        if (id) {
-            dispatch(movieActions.getVideo({id: id}))
-            dispatch(movieActions.getSimilar({id: id}))
-        } if (movieId) {
-            dispatch(movieActions.getVideo({id: movieId}))
-            dispatch(movieActions.getSimilar({id: movieId}))
-        }
+        fetch(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=7cf9b0f30126c3f31e4009979a376a0f`)
+            .then(value => value.json())
+            .then(value => {
+                setVideo({...value})
+            })
+    }, [id])
 
-    }, [id, movieId])
+    const firstItem = video?.results?.splice(1, 2)[0];
 
     return (
 
@@ -44,10 +38,18 @@ const MovieDetails = () => {
             <div className={'movie_details_container'}>
                 <div className={'movie_details-container_info'}>
                     <div className={'movie_details_title'}>
-                        Title : <span className={'movie_details_span'}>{data?.title}</span>
+                        Title : <span className={'movie_details_span'}>{data?.name}</span>
                     </div>
                     <div className={'movie_details_status'}>
                         Status : {data?.status}
+                    </div>
+                </div>
+                <div className={'tvShow_details-container_info'}>
+                    <div className={'tvShow_details_title'}>
+                        Number of seasons : <span className={'movie_details_span'}>{data?.number_of_seasons}</span>
+                    </div>
+                    <div className={'tvShow_details_status'}>
+                        Number of episodes: <span className={'movie_details_span'}>{data?.number_of_episodes}</span>
                     </div>
                 </div>
                 <div className={'movie_details_wrap'}>
@@ -62,7 +64,7 @@ const MovieDetails = () => {
                             />
                         </div>
                         <div className={'movie_details_vote_count'}>
-                            Vote count : {data?.vote_count}
+                            Vote count : <span className={'movie_details_span'}>{data?.vote_count}</span>
                         </div>
                         <div className={'movie_details_buttons'}>
                             <button className={'movie_details_button_add'} onClick={() => {}}>
@@ -83,32 +85,41 @@ const MovieDetails = () => {
                         <div className={'details_tagline'}>
                             Tagline : <span className={'details_tagline_span'}>{data.tagline}</span>
                         </div>
-                        <div className={'details_realise_runtime'}>
-                            <div className={'details_realise'}>
-                                Data resease :  {data.release_date}
+                        <div className={'tvShow_realise_runtime'}>
+                            <div className={'tvSHow_realise'}>
+                                Data resease : <span className={'movie_details_span'}>{data?.first_air_date}</span>
                             </div>
-                            <div className={'details_runtime'}>
-                                <div className={'details_runtime'}>
-                                    Runtime :  {data.runtime}
-                                </div>
+                            <div className={'tvSHow_runtime'}>
+                                Episode runtime :  <span className={'movie_details_span'}>{data?.episode_run_time}</span>
                             </div>
                         </div>
                         <div className={'details_original_language'}>
                             Original language : {data.original_language}
                         </div>
                         <div className={'details_country_container'}>
-                            {data.production_countries?.map((county) => (
+                            {tvPopularById.production_countries?.map((county) => (
                                 <div className={'details_country'} key={county.iso_3166_1}> Country: {county.name}</div>))}
                         </div>
-                        <div className={'movie_revenue'}>
-                            Revenue : {data.revenue}
+                        <div className={'tvShow_realise_runtime'}>
+                            <div className={'tvShow_popularity'}>
+                                Popularity : {data?.popularity}
+                            </div>
+                            <div className={'tvShow_type'}>
+                                Type : {data?.type}
+                            </div>
+                        </div>
+                        <div className={'tvSHow_createdBy'}>
+                           <span className={'tvSHow_createdBy_span'}>Created by :</span> {data?.created_by?.map((created) => (
+                                <div className={'createdByDetails'} key={created.id}>
+                                    <span className={'tvSHow_createdBy_span'}>{created?.name}</span></div>
+                        ))}
                         </div>
 
                         <div className={'movie_trailer'}>
                             <YouTube
-                                videoId={videos.key}
-                                className={"youtube amru"}
-                                containerClassName={"youtube-container amru"}
+                                videoId={firstItem?.key}
+                                className={"youtube"}
+                                containerClassName={"youtube-container"}
                             />
                         </div>
 
@@ -116,17 +127,8 @@ const MovieDetails = () => {
                 </div>
             </div>
 
-            <div className={'movie_details_similar'}>
-                Some similar movies
-            </div>
-
-            <div className={'movies'}>
-                {
-                    similar?.map(similarOne => <Similar key={similarOne.id} similarOne={similarOne} />)
-                }
-            </div>
         </div>
     );
 };
 
-export {MovieDetails};
+export {TvShowDetails};
