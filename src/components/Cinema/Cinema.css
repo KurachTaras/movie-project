@@ -1,23 +1,21 @@
-.cinema_container {
-}
 
 .cinema_dates {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 80%;
-    border: 2px solid white;
+    border: 2px solid var(--text-color);
 }
 
 .movie_details_dates {
-    color: white;
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .movie_details-container_info_d{
-    border: 1px solid white;
+    border: var(--border-container-info);
     padding: 10px;
     margin-bottom: 10px;
     display: flex;
@@ -29,7 +27,9 @@
 
 .dates_span {
     margin: 10px;
+    padding: 5px;
+    box-sizing: border-box;
     font-style: italic;
     font-weight: bold;
-    border: 1px solid white;
+    border: var(--border-container-info);
 }

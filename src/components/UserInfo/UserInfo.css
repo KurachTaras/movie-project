@@ -23,8 +23,8 @@
 
 .user_name, .user_card_id, .user_username {
     width: 40%;
-    color: white;
-    border: 1px solid white;
+    color: var(--text-color);
+    border: var(--border-container-info);
     padding: 10px;
     margin: 20px 20px;
 }

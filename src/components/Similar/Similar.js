@@ -1,13 +1,12 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {movieActions} from "../../redux";
+import {useSelector} from "react-redux";
+
 import StarRatings from "react-star-ratings/build/star-ratings";
 
 const Similar = ({similarOne}) => {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const {genres} = useSelector(state => state.movieReducer);
 
     const filteredGenres = similarOne?.genre_ids.reduce((acc, id) => {

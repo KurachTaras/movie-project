@@ -17,9 +17,11 @@ const initialState = {
     similar: [],
     videos: [],
     upcoming: [],
+    tvRecommendations: [],
     upcomingDates: {},
     movieList: [],
     account: {},
+    person: {},
     favoriteMovies: [],
     tvShowVideo: [],
     currentMovie: null,
@@ -36,6 +38,29 @@ const initialState = {
 
 }
 
+
+const getPerson = createAsyncThunk(
+    'moviesSlice/getPerson',
+    async ({id}, {rejectedWithValue, dispatch}) => {
+        try {
+            const {data} = await movieService.getPerson(id)
+            return data
+        } catch (e) {
+            return rejectedWithValue(e.response.data)
+        }
+    }
+)
+
+const getTvRecommendations = createAsyncThunk(
+    'moviesSlice/getTvRecommendations',
+    async ({id}, {rejectedWithValue, dispatch}) => {
+        try {
+            const {data} = await movieService.getTvRecommendations(id)
+        } catch (e) {
+            return rejectedWithValue(e.response.data)
+        }
+    }
+)
 
 const getMovieList = createAsyncThunk(
     'moviesSlice/getMovieList',
@@ -101,9 +126,9 @@ const getMovieById = createAsyncThunk(
 
 const getTvPopular = createAsyncThunk(
     'moviesSlice/getTvPopular',
-    async (_, {rejectedWithValue, dispatch}) => {
+    async ({page}, {rejectedWithValue, dispatch}) => {
         try {
-            const {data} = await movieService.getTvPopular();
+            const {data} = await movieService.getTvPopular(page);
             return data
         } catch (e) {
             return rejectedWithValue(e.response.data)
@@ -150,9 +175,9 @@ const getTrending = createAsyncThunk(
 
 const getNowPlaying = createAsyncThunk(
     'moviesSlice/getNowPlaying',
-    async (_, {rejectedWithValue, dispatch}) => {
+    async ({page}, {rejectedWithValue, dispatch}) => {
         try {
-            const {data} = await movieService.getNowPlaying();
+            const {data} = await movieService.getNowPlaying(page);
             return data
         } catch (e) {
             return rejectedWithValue(e.response.data)
@@ -331,12 +356,13 @@ const movieSlice = createSlice({
                 const {id, results} = action.payload
                 state.tvShowVideo = results
             })
-            // .addCase(getPage.fulfilled, (state, action) => {
-            //     state.page = action.payload
-            // })
-            // .addCase(getPages.fulfilled, (state, action) => {
-            //     state.totalPage = action.payload
-            // })
+            .addCase(getPerson.fulfilled, (state, action) => {
+                state.person = action.payload
+            })
+            .addCase(getTvRecommendations.fulfilled, (state, action) => {
+                const {page, results} = action.payload
+                state.tvRecommendations = results
+            })
 })
 
 const {reducer: movieReducer, actions: {nextPage, setId, addMovie, removeMovie, markWatched, moveToWatchList, removeWatched}} = movieSlice;
@@ -364,7 +390,10 @@ const movieActions = {
     markWatched,
     moveToWatchList,
     removeWatched,
-    getTvVideo
+    getTvVideo,
+    getTvRecommendations,
+    getPerson
+
 }
 
 export {

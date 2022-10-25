@@ -1,7 +1,8 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import StarRatings from "react-star-ratings/build/star-ratings";
 import {useNavigate} from "react-router-dom";
+
+import StarRatings from "react-star-ratings/build/star-ratings";
 
 const CinemaCard = ({playing}) => {
 
@@ -32,7 +33,7 @@ const CinemaCard = ({playing}) => {
             <div className={'movie_ratings'}>
                 <StarRatings name={'movie_rating_star'}
                              rating={playing.vote_average}
-                             starRatedColor={"white"}
+                             starRatedColor={"crimson"}
                              numberOfStars={5}
                              starDimension={"15px"}
                 />

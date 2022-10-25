@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html[data-theme='dark'] {
+  --button-text-color: white;
+  --button-background-color: white;
+  --button-border-color: crimson;
+
+  --background-color: black;
+  --text-color: white;
+  --border-container-info: 1px solid white;
+
+}
+
+html[data-theme='light'] {
+  --button-text-color: black;
+  --button-background-color: black;
+  --button-border-color: crimson;
+
+  --background-color: white;
+  --text-color: black;
+  --border-container-info: 1px solid black;
+
+}

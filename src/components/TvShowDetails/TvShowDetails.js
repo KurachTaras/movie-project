@@ -1,16 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
+
 
 import {useDispatch, useSelector} from "react-redux";
 import StarRatings from "react-star-ratings/build/star-ratings";
 import YouTube from "react-youtube";
 import './TvShowDetails.css'
+import {BiTime} from "react-icons/bi";
+import {BsCalendarWeek} from "react-icons/bs"
+import {movieActions} from "../../redux";
+
 
 const TvShowDetails = () => {
 
     const [data, setData] = useState([]);
     const {id} = useParams();
-    const {tvPopularById, tvShowVideo} = useSelector(state => state.movieReducer);
+    const dispatch = useDispatch();
+    const {tvPopularById} = useSelector(state => state.movieReducer);
 
     const [video, setVideo] = useState({});
 
@@ -30,7 +36,11 @@ const TvShowDetails = () => {
             })
     }, [id])
 
-    const firstItem = video?.results?.splice(1, 2)[0];
+    useEffect(()=> {
+        dispatch(movieActions.getTvRecommendations({id}))
+    }, [id])
+
+    const firstItem = video?.results?.splice(0, 2)[0];
 
     return (
 
@@ -54,7 +64,7 @@ const TvShowDetails = () => {
                 </div>
                 <div className={'movie_details_wrap'}>
                     <div className={'movie_details_banner'}>
-                        <img className={'movie_details_poster'} src={"https://image.tmdb.org/t/p/w500/" + data?.poster_path} alt="" />)
+                        <img className={'movie_details_poster'} src={"https://image.tmdb.org/t/p/w500/" + data?.poster_path} alt="" />
                         <div className={'movie_details_rating'}>
                             <StarRatings name={'movie_details_rating_star'}
                                          rating={data?.vote_average}
@@ -87,10 +97,10 @@ const TvShowDetails = () => {
                         </div>
                         <div className={'tvShow_realise_runtime'}>
                             <div className={'tvSHow_realise'}>
-                                Data resease : <span className={'movie_details_span'}>{data?.first_air_date}</span>
+                                Data release : <BsCalendarWeek className={'tvShow_icon'} /> <span className={'movie_details_span'}>{data?.first_air_date}</span>
                             </div>
                             <div className={'tvSHow_runtime'}>
-                                Episode runtime :  <span className={'movie_details_span'}>{data?.episode_run_time}</span>
+                                Episode runtime : <BiTime className={'tvShow_icon'} />  <span className={'movie_details_span'}>{data?.episode_run_time}</span>
                             </div>
                         </div>
                         <div className={'details_original_language'}>
@@ -123,6 +133,50 @@ const TvShowDetails = () => {
                             />
                         </div>
 
+                    </div>
+                </div>
+            </div>
+
+            <div className={'tvShow_last_one'}>
+               Last episode
+            </div>
+
+            <div className={'tvShow_last_episode'}>
+                <div className={'tvShow_last_episode_poster'}>
+                    <img className={'tvShow_poster'} src={"https://image.tmdb.org/t/p/w500/" + data?.last_episode_to_air?.still_path} alt="" />
+                </div>
+                <div className={'tvShow_last_episode_info'}>
+                    <div className={'tvSHow_last_episode_season_info, tvShow_details_container'}>
+                        <div className={'tvShow_last_episode_season_number'}>
+                            Last Season : {data?.last_episode_to_air?.season_number}
+                        </div>
+                        <div className={'tvShow_last'}>
+                            Last Episode : {data?.last_episode_to_air?.episode_number}
+                        </div>
+                    </div>
+                    <div className={'tvShow_last_episode_air, tvShow_details_container'}>
+                        <div className={'tvShow_last_episode_air_date'}>
+                            Air_date : {data?.last_episode_to_air?.air_date}
+                        </div>
+                        <div className={'tvShow_last_episode_number'}>
+                            Episode number : {data?.last_episode_to_air?.episode_number}
+                        </div>
+                    </div>
+                    <div className={'tvShow_last_episode_name, tvShow_details_container'}>
+                        <div className={'tvShow_last_episode_n'}>
+                            Name : {data?.last_episode_to_air?.name}
+                        </div>
+                        <div className={'tvShow_last_episode_time'}>
+                            Runtime : {data?.last_episode_to_air?.runtime}
+                        </div>
+                    </div>
+                    <div className={'tvShow_last_episode_name, tvShow_details_container'}>
+                        <div className={'tvShow_last_episode_n'}>
+                            Average vote : {data?.last_episode_to_air?.vote_average}
+                        </div>
+                        <div className={'tvShow_last_episode_time'}>
+                            Vote count : {data?.last_episode_to_air?.vote_count}
+                        </div>
                     </div>
                 </div>
             </div>

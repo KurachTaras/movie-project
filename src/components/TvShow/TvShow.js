@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
+
 import StarRatings from "react-star-ratings/build/star-ratings";
+
 import {useDispatch, useSelector} from "react-redux";
 import {movieActions} from "../../redux";
 
@@ -38,7 +40,7 @@ const TvShow = ({popular}) => {
             <div className={'movie_ratings'}>
                 <StarRatings name={'movie_rating_star'}
                              rating={popular?.vote_average}
-                             starRatedColor={"white"}
+                             starRatedColor={"crimson"}
                              numberOfStars={5}
                              starDimension={"15px"}
                 />

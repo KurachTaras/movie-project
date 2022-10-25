@@ -19,7 +19,7 @@ function App() {
       }} className={'app_movie'}>
         <Routes>
             <Route path={'/'} element={<MainLayout/>}>
-                <Route index element={<Navigate to={'movies'}/>}/>
+                <Route index element={<Navigate to={'tvShow'}/>}/>
                 <Route path={'movies'} element={<MoviesPage/>}/>
                 <Route path={'search'} element={<SearchPage/>}/>
                 <Route path={'movies/:id'} element={<MovieDetailsPage/>}/>

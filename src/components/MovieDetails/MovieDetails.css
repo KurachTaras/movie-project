@@ -35,13 +35,13 @@ body{
 .movie_details-container_info {
     display: flex;
     justify-content: space-between;
-    border: 1px solid white;
+    border: var(--border-container-info);
     padding: 10px;
     margin-bottom: 10px;
 }
 
 .movie_details_title {
-    color: white;
+    color: var(--text-color);
     padding: 5px;
     box-sizing: border-box;
 }
@@ -50,8 +50,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    border: 1px solid white;
+    color: var(--text-color);
+    border: var(--border-container-info);
     padding: 10px;
     margin-top: 20px;
 }
@@ -66,46 +66,19 @@ body{
     font-weight: bold;
 }
 
-.detail_title {
-    color: white;
-    border: 1px solid white;
+.detail_title, .details_overview, .details_original_language {
+    color:var(--text-color);
+    border: var(--border-container-info);
     padding: 10px;
-}
-
-.details_overview {
-    color: white;
-    border: 1px solid white;
-    padding: 10px;
-}
-
-.details_data-time {
-    color: white;
-    border: 1px solid white;
-    padding: 10px;
-    margin-top: 20px;
 }
 
 .details_realise_runtime {
-    color: white;
-    border: 1px solid white;
+    color: var(--text-color);
+    border: var(--border-container-info);
     padding: 10px;
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
-}
-
-.details_original_language {
-    color: white;
-    border: 1px solid white;
-    padding: 10px;
-    margin-top: 20px;
-}
-
-.details_tagline {
-    color: white;
-    border: 1px solid white;
-    padding: 10px;
-    margin-top: 20px;
 }
 
 .movie_details_span{
@@ -124,24 +97,18 @@ body{
 }
 
 .details_county_container {
-    color: white;
+    color: var(--text-color);
     padding: 10px;
 
 }
 
-.details_country {
-    color: white;
-    border: 1px solid white;
-    padding: 10px;
-    margin-top: 20px;
-}
-
-.movie_revenue {
-    color: white;
-    border: 1px solid white;
+.details_container {
+    color: var(--text-color);
+    border: var(--border-container-info);
     padding: 10px;
     margin-top: 20px;
 }
+
 .movie_trailer {
     display: flex;
     justify-content: center;
@@ -191,8 +158,8 @@ body{
     font-size: 30px;
     font-style: italic;
     font-weight: bold;
-    color: white;
-    border: 1px solid white;
+    color: var(--text-color);
+    border: var(--border-container-info);
     padding: 10px;
     margin-top: 80px;
 }

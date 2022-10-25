@@ -1,17 +1,13 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-
+import {useSelector} from "react-redux";
 
 import './Movie.css'
-import {baseURL, urls} from "../../configs";
-import {useDispatch, useSelector} from "react-redux";
-import {movieActions} from "../../redux";
 import StarRatings from "react-star-ratings/build/star-ratings";
 
 const Movie = ({movie}) => {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const {genres} = useSelector(state => state.movieReducer);
 
     const filteredGenres = movie?.genre_ids.reduce((acc, id) => {
@@ -39,7 +35,7 @@ const Movie = ({movie}) => {
                 <div className={'movie_ratings'}>
                     <StarRatings name={'movie_rating_star'}
                                  rating={movie?.vote_average}
-                                 starRatedColor={"white"}
+                                 starRatedColor={"crimson"}
                                  numberOfStars={5}
                                  starDimension={"15px"}
                     />

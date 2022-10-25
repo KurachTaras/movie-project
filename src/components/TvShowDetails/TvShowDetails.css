@@ -1,6 +1,6 @@
 .tvSHow_createdBy {
-    color: white;
-    border: 1px solid white;
+    color: var(--text-color);
+    border: var(--border-container-info);
     padding: 10px;
     margin-top: 20px;
     display: flex;
@@ -22,9 +22,48 @@
 
 .tvSHow_realise, .tvSHow_runtime, .tvShow_details_title,
 .tvShow_details_status, .tvShow_type, .tvShow_popularity{
-    color: white;
-    border: 1px solid white;
+    /*color: white;*/
+    color: var(--text-color);
+    border: var(--border-container-info);
     padding: 10px;
     margin: 20px 20px;
 }
 
+.tvShow_icon {
+    color: var(--text-color);
+    box-sizing: border-box;
+}
+
+.tvShow_last_episode {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 120px;
+}
+
+.tvShow_details_container {
+    color: var(--text-color);
+    border: var(--border-container-info);
+    padding: 10px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tvShow_last_episode_info {
+    width:750px;
+}
+
+.tvShow_last_one {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: bold;
+    color: var(--text-color);
+    border: var(--border-container-info);
+    padding: 10px;
+    margin-bottom: 30px;
+}

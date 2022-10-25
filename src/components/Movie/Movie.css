@@ -24,8 +24,9 @@
 }
 
 .movie_title {
-    color: white;
+    color: var(--text-color);
     overflow: hidden;
+    font-weight: bold;
 }
 
 .movie_ratings{

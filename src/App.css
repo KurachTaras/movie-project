@@ -5,7 +5,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: black;
+  /*background: black;*/
+  background: var(--background-color);
 }
 
 .App-logo {

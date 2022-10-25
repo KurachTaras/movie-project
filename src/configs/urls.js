@@ -23,6 +23,8 @@ const urls = {
     addItemList: '/list/8223831/add_item',
     favorite: '/account/',
     tvVideo: '/tv/',
+    getPerson: '/person/',
+    getTvRecommendations: '/tv/'
 }
 
 export {

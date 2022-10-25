@@ -1,0 +1,12 @@
+.tvShow_popular {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: bold;
+    color: var(--text-color);
+    border: var(--border-container-info);
+    padding: 10px;
+    margin-top: 120px;
+}

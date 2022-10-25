@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {NavLink, useNavigate} from "react-router-dom";
-import {BsSearch} from "react-icons/bs"
+import {BsSearch, BsSun, BsMoon} from "react-icons/bs"
 
 import './Header.css'
 import {useDispatch, useSelector} from "react-redux";
 import {movieActions} from "../../redux";
+import {useTheme} from "../../hooks/use-theme";
+
+
 
 const Header = () => {
 
@@ -13,7 +16,17 @@ const Header = () => {
     const dispatch = useDispatch();
     const {account} = useSelector(state => state.movieReducer);
 
+    const {theme, setTheme} = useTheme();
+
     const navigate = useNavigate();
+
+    const handleLightTheme = () => {
+        setTheme('light')
+    }
+
+    const handleDarkTheme = () => {
+        setTheme('dark')
+    }
 
     const handleSearch = (e) => {
         setSearch(e.target.value)
@@ -63,6 +76,13 @@ const Header = () => {
                 </div>
                     <img  className={'header_avatar'} src={'https://image.tmdb.org/t/p/w500/' + account?.avatar?.tmdb?.avatar_path}
                           onClick={() => navigate('/user', {state: {...account}})} alt=""/>
+
+                <div className={'theme_switch'}>
+                    <BsSun className={'sun, icon'} onClick={handleLightTheme}/>
+                    <BsMoon className={'moon, icon'} onClick={handleDarkTheme}/>
+                    {/*<button onClick={handleLightTheme}>Light</button>*/}
+                    {/*<button onClick={handleDarkTheme}>Dark</button>*/}
+                </div>
             </div>
 
         </div>

@@ -110,7 +110,23 @@
     object-fit: cover;
 }
 
-.header_avatar:hover {
+.BsSearch:hover {
+    color: crimson;
+    font-size: 22px;
+}
+
+.header_avatar, .icon:hover {
     border: 2px solid crimson;
 }
 
+.theme_switch {
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon {
+    color: white;
+    cursor: pointer;
+    font-size: 30px;
+}

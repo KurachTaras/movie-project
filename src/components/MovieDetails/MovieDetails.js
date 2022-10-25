@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {movieActions} from "../../redux";
-import YouTube from "react-youtube";
-import {Similar} from "../Similar/Similar";
 
-import './MovieDetails.css'
+
 import StarRatings from "react-star-ratings/build/star-ratings";
+import YouTube from "react-youtube";
+
+import {movieActions} from "../../redux";
+
+import {Similar} from "../Similar/Similar";
+import './MovieDetails.css'
 
 
 const MovieDetails = () => {
@@ -52,11 +55,11 @@ const MovieDetails = () => {
                 </div>
                 <div className={'movie_details_wrap'}>
                     <div className={'movie_details_banner'}>
-                        <img className={'movie_details_poster'} src={"https://image.tmdb.org/t/p/w500/" + data?.poster_path} alt="" />)
+                        <img className={'movie_details_poster'} src={"https://image.tmdb.org/t/p/w500/" + data?.poster_path} alt="" />
                         <div className={'movie_details_rating'}>
                             <StarRatings name={'movie_details_rating_star'}
                                          rating={data?.vote_average}
-                                         starRatedColor={"white"}
+                                         starRatedColor={'yellow'}
                                          numberOfStars={5}
                                          starDimension={"29px"}
                             />
@@ -80,7 +83,7 @@ const MovieDetails = () => {
                                 <p>{data.overview}</p>
                             </div>
                         </div>
-                        <div className={'details_tagline'}>
+                        <div className={'details_tagline, details_container'}>
                             Tagline : <span className={'details_tagline_span'}>{data.tagline}</span>
                         </div>
                         <div className={'details_realise_runtime'}>
@@ -93,14 +96,14 @@ const MovieDetails = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={'details_original_language'}>
+                        <div className={'details_original_language, details_container'}>
                             Original language : {data.original_language}
                         </div>
                         <div className={'details_country_container'}>
                             {data.production_countries?.map((county) => (
-                                <div className={'details_country'} key={county.iso_3166_1}> Country: {county.name}</div>))}
+                                <div className={'details_country, details_container'} key={county.iso_3166_1}> Country: {county.name}</div>))}
                         </div>
-                        <div className={'movie_revenue'}>
+                        <div className={'movie_revenue, details_container'}>
                             Revenue : {data.revenue}
                         </div>
 

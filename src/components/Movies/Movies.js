@@ -1,21 +1,24 @@
 import React, {useEffect, useState} from 'react';
+import {useNavigate, useSearchParams} from "react-router-dom";
+
+
+import Pagination from "react-js-pagination";
 
 import {Movie} from "../Movie/Movie";
 import {useDispatch, useSelector} from "react-redux";
 import {movieActions} from "../../redux";
-import {useNavigate, useSearchParams} from "react-router-dom";
-import Pagination from "react-js-pagination";
 
 import './Movies.css'
 import {movieService} from "../../services";
 import StarRatings from "react-star-ratings/build/star-ratings";
+
 
 const Movies = () => {
 
     const [movie, setMovie] = useState()
     const [query, setQuery] = useSearchParams({page: '1'})
     const dispatch = useDispatch();
-    const {movies, siblingCount, totalPages, pageRange, genres, movieId, trending} = useSelector(state => state.movieReducer)
+    const {movies, genres, trending} = useSelector(state => state.movieReducer)
 
     const navigate = useNavigate();
     const newTrending = Math.floor(Math.random() * trending?.length)
@@ -27,7 +30,6 @@ const Movies = () => {
         }
         return acc;
     }, []);
-    console.log(filteredGenres);
 
     useEffect(() => {
         movieService.getTrending().then((res) => {
@@ -36,8 +38,6 @@ const Movies = () => {
             setMovie(res.data.results[newMovie])
         })
     }, [])
-    
-    console.log(movie);
 
     useEffect(() => {
         dispatch(movieActions.getMovies({page: query.get('page')}))
@@ -49,24 +49,9 @@ const Movies = () => {
     }, [])
 
 
-    console.log(genres);
-    console.log(trending);
-
-    const nextPage = () => {
-        const nextPage = +query.get('page') + 1;
-        setQuery({page: `${nextPage}`})
-    }
-
-    const prevPage = () => {
-        const prevPage = +query.get('page') - 1;
-        setQuery({page: `${prevPage}`})
-    }
-
     const handlePageChange = (pageNumber) => {
         setQuery({page: `${pageNumber}`})
     }
-
-    console.log(query.get('page'));
 
     return (
         <div className={'movies_page'}>
@@ -90,7 +75,7 @@ const Movies = () => {
                             <div className={'trending_rating'}>
                                 <StarRatings name={'trending_rating_star'}
                                     rating={movie?.vote_average}
-                                    starRatedColor={"yellow"}
+                                    starRatedColor={"crimson"}
                                     numberOfStars={5}
                                     starDimension={"20px"}
                                 />
@@ -125,8 +110,6 @@ const Movies = () => {
                             }
                         </div>
                     </div>
-
-
                     <div className={'pagination'}>
                         <Pagination onChange={handlePageChange}
                                     itemClass={'pagin_li'}
